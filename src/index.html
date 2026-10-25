@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#08080a">
+  <meta name="description" content="Check how well the story elements of a Hollywood Animal script fit together, and see its art and commercial appeal.">
+  <title>Hollywood Animal Calculator</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon-256.png">
+  <link rel="stylesheet" href="css/QuickMode.base.css">
+  <link rel="stylesheet" href="css/QuickMode.inputs.css">
+  <link rel="stylesheet" href="css/QuickMode.results.css">
+</head>
+<body>
+  <a class="skip-link" href="#tagSearch">Skip to the script builder</a>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <div class="brand">
+        <h1 class="brand-name">Hollywood <span class="accent">Animal</span> <span class="brand-sub">Calculator</span></h1>
+        <span class="brand-version">v3.0.0</span>
+      </div>
+      <nav class="mode-nav" aria-label="Calculator mode">
+        <div class="mode-item">
+          <a class="btn btn-mode is-current" href="#tagSearch" aria-current="page">Quick Mode</a>
+          <button class="info-btn" type="button" id="infoBtn" aria-label="About Quick Mode" aria-expanded="false" aria-controls="infoPop">
+            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="4.6" r="1.25" fill="currentColor"/><path d="M8 7.4v4.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+          </button>
+        </div>
+        <button class="btn btn-mode" type="button" disabled aria-disabled="true">Advanced Mode<span class="soon">Coming Soon!</span></button>
+        <div class="info-pop" id="infoPop" role="group" aria-label="About Quick Mode" hidden>
+          <p>Quick Mode checks how well the tags in a script fit together, and what that is worth, before you spend any in-game money.</p>
+          <button class="link-btn" type="button" id="moreBtn">Find out more</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="main" aria-busy="true">
+
+    <div class="load-error" id="loadError" role="alert" hidden>
+      <p id="loadErrorText">Couldn't load the game data.</p>
+      <button class="btn btn-ghost" type="button" id="retryBtn">Retry</button>
+    </div>
+
+    <section class="card" aria-labelledby="searchTitle">
+      <div class="card-head">
+        <h2 id="searchTitle">Quick tag search</h2>
+        <button class="btn btn-ghost btn-small" type="button" id="resetBtn">Reset all</button>
+      </div>
+      <div class="search">
+        <svg class="search-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <input id="tagSearch" class="search-input" type="text" role="combobox" aria-expanded="false" aria-controls="searchList" aria-autocomplete="list" aria-label="Search for a tag" placeholder="Search tags, for example Cowboy" autocomplete="off" spellcheck="false" disabled>
+        <ul class="search-list" id="searchList" role="listbox" aria-label="Matching tags" hidden></ul>
+      </div>
+      <p class="helper" id="searchHelp">Pick a tag and it goes into the right field for you.</p>
+    </section>
+
+    <section class="card" aria-labelledby="genresTitle" id="genresCard">
+      <div class="card-head">
+        <h2 id="genresTitle">Genres</h2>
+      </div>
+      <div class="share-bar" id="shareBar" aria-hidden="true"></div>
+      <div class="grid genre-grid" id="genreGrid"></div>
+      <p class="helper note" id="genreNote" hidden></p>
+    </section>
+
+    <section class="card" aria-labelledby="storyTitle">
+      <div class="card-head">
+        <h2 id="storyTitle">Story elements</h2>
+      </div>
+      <div class="grid">
+        <div class="field">
+          <div class="field-head"><label for="sel-setting">Setting</label><span class="hint">Required</span></div>
+          <div class="select-wrap"><select id="sel-setting" data-field="setting" disabled><option value="">Loading…</option></select></div>
+        </div>
+        <div class="field">
+          <div class="field-head"><label for="sel-protagonist">Protagonist</label><span class="hint">Required</span></div>
+          <div class="select-wrap"><select id="sel-protagonist" data-field="protagonist" disabled><option value="">Loading…</option></select></div>
+        </div>
+        <div class="field">
+          <div class="field-head"><label for="sel-antagonist">Antagonist</label></div>
+          <div class="select-wrap"><select id="sel-antagonist" data-field="antagonist" disabled><option value="">Loading…</option></select></div>
+        </div>
+        <div class="field">
+          <div class="field-head"><label for="sel-finale">Finale</label></div>
+          <div class="select-wrap"><select id="sel-finale" data-field="finale" disabled><option value="">Loading…</option></select></div>
+        </div>
+        <div class="field list-field">
+          <div class="field-head"><span class="label" id="supportingLabel">Supporting characters</span><span class="hint" id="supportingCount"></span></div>
+          <div class="stack" id="supportingList" role="group" aria-labelledby="supportingLabel"></div>
+          <button class="btn btn-add" type="button" id="addSupporting">Add supporting character</button>
+        </div>
+        <div class="field list-field">
+          <div class="field-head"><span class="label" id="themesLabel">Themes and events</span><span class="hint" id="themesCount"></span></div>
+          <div class="stack" id="themesList" role="group" aria-labelledby="themesLabel"></div>
+          <button class="btn btn-add" type="button" id="addTheme">Add theme or event</button>
+        </div>
+      </div>
+    </section>
+
+    <button class="btn btn-primary btn-wide" type="button" id="calcBtn">Calculate</button>
+    <p class="sr-only" id="statusLive" role="status" aria-live="polite"></p>
+  </main>
+
+  <div class="wrap" id="ruleWrap"><hr class="rule"></div>
+
+  <section class="wrap results" id="results" data-state="empty" aria-labelledby="resultsTitle" tabindex="-1" hidden>
+    <h2 class="results-title" id="resultsTitle">Results</h2>
+    <p class="sr-only" id="resultsLive" role="status" aria-live="polite"></p>
+
+    <div class="results-grid">
+      <article class="result result-compat" aria-labelledby="rc-title">
+        <h3 id="rc-title">Script compatibility</h3>
+        <div class="dial" id="dial">
+          <svg viewBox="0 0 240 132" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="dialScale" gradientUnits="userSpaceOnUse" x1="20" y1="0" x2="220" y2="0">
+                <stop offset="0" stop-color="#f8696b"/>
+                <stop offset=".5" stop-color="#ffffff"/>
+                <stop offset="1" stop-color="#63be7b"/>
+              </linearGradient>
+            </defs>
+            <path class="dial-track" d="M20 120A100 100 0 0 1 220 120" pathLength="100"/>
+            <path class="dial-fill" id="dialFill" d="M20 120A100 100 0 0 1 220 120" pathLength="100"/>
+            <g class="dial-knob" id="dialKnob"><circle cx="20" cy="120" r="9"/></g>
+          </svg>
+          <p class="dial-value"><span id="resCompat">–</span><span class="dial-of">out of 5</span></p>
+        </div>
+        <ul class="scale scale-3"><li>1 Clashing</li><li>3 Neutral</li><li>5 Great fit</li></ul>
+        <p class="helper">How well your tags fit together.</p>
+      </article>
+
+      <article class="result result-mod" aria-labelledby="rm-title">
+        <h3 id="rm-title">Score modifier</h3>
+        <div class="stage">
+          <p class="big"><span id="resMod">–</span><span class="unit">of base quality</span></p>
+          <div class="track track-scale" id="modTrack" aria-hidden="true"><span class="track-mid"></span><span class="track-pin" id="modPin"></span></div>
+          <ul class="scale scale-3"><li>−50%</li><li>0</li><li>+50%</li></ul>
+        </div>
+        <p class="helper">How much your tags raise or lower the script's base quality.</p>
+      </article>
+
+      <article class="result result-art" aria-labelledby="ra-title">
+        <h3 id="ra-title">Art appeal</h3>
+        <div class="stage">
+          <p class="big"><span id="resArt">–</span><span class="unit">points</span></p>
+          <div class="track track-art" id="artTrack" aria-hidden="true"><span class="track-fill" id="artFill"></span><span class="track-mid"></span><span class="track-pin" id="artPin"></span></div>
+        </div>
+        <p class="helper">Artistic points your tags add or take away.</p>
+      </article>
+
+      <article class="result result-com" aria-labelledby="rn-title">
+        <h3 id="rn-title">Commercial appeal</h3>
+        <div class="stage">
+          <p class="big"><span id="resCom">–</span><span class="unit">points</span></p>
+          <div class="track track-com" id="comTrack" aria-hidden="true"><span class="track-fill" id="comFill"></span><span class="track-mid"></span><span class="track-pin" id="comPin"></span></div>
+        </div>
+        <p class="helper">Box-office points your tags add or take away.</p>
+      </article>
+
+      <article class="result result-lean" aria-labelledby="rl-title">
+        <h3 id="rl-title">Leans towards</h3>
+        <div class="stage">
+          <p class="big big-word"><span id="resLean">–</span></p>
+          <div class="beam" id="beam" aria-hidden="true"><span class="beam-pin" id="beamPin"></span></div>
+          <ul class="scale scale-2"><li>Art</li><li>Commercial</li></ul>
+        </div>
+        <p class="helper">Within 0.1 points counts as balanced.</p>
+      </article>
+    </div>
+
+    <article class="result result-explain" aria-labelledby="explainTitle">
+      <h3 id="explainTitle">What this means</h3>
+      <p class="verdict" id="explainVerdict">Pick a genre, a setting and a protagonist to see results.</p>
+      <div class="prose" id="explainBody"></div>
+      <div class="pairs" id="pairs" hidden>
+        <section aria-labelledby="weakTitle">
+          <h4 id="weakTitle">Weakest pairs</h4>
+          <ul class="pair-list" id="weakList"></ul>
+        </section>
+        <section aria-labelledby="strongTitle">
+          <h4 id="strongTitle">Strongest pairs</h4>
+          <ul class="pair-list" id="strongList"></ul>
+        </section>
+      </div>
+      <section class="assumptions" id="assumptions" aria-labelledby="assumeTitle" hidden>
+        <h4 id="assumeTitle">What this assumes</h4>
+        <ul>
+          <li>The writer's skill is left out. Art and commercial points are the flat amount your tags add, the same for every writer.</li>
+          <li>Some rules that only apply in a full playthrough are left out:
+            <span class="term"><button class="term-btn" type="button" aria-describedby="tipTrash" aria-expanded="false">trash tags</button><span class="term-tip" id="tipTrash" role="tooltip" hidden>Tags the game marks as trash. Any one of them makes the script a trash movie, which scores much lower. A second one in the same group counts for half.</span></span>
+            and
+            <span class="term"><button class="term-btn" type="button" aria-describedby="tipSpoil" aria-expanded="false">spoiling</button><span class="term-tip" id="tipSpoil" role="tooltip" hidden>When a tag clashes with another, it cannot score better than the worst tag it clashes with. One bad match can drag a good tag down to its level.</span></span>.
+            The special conditions that a few specific tags carry are left out too.</li>
+        </ul>
+      </section>
+    </article>
+  </section>
+
+  <div class="dock" id="dock" hidden>
+    <a class="dock-inner" href="#results" aria-label="Jump to full results">
+      <span class="dock-item"><span class="dock-label">Compatibility</span><span class="dock-val" id="dkCompat">–</span></span>
+      <span class="dock-item"><span class="dock-label">Modifier</span><span class="dock-val" id="dkMod">–</span></span>
+      <span class="dock-item"><span class="dock-label">Art</span><span class="dock-val is-art" id="dkArt">–</span></span>
+      <span class="dock-item"><span class="dock-label">Commercial</span><span class="dock-val is-commercial" id="dkCom">–</span></span>
+    </a>
+  </div>
+
+  <dialog class="modal" id="aboutDialog" aria-labelledby="aboutTitle">
+    <div class="modal-head">
+      <h2 id="aboutTitle">What Quick Mode does</h2>
+      <button class="icon-btn modal-close" type="button" id="aboutClose" aria-label="Close" autofocus>
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      </button>
+    </div>
+    <div class="modal-body prose">
+      <p>Quick Mode is a planning tool. You pick the story ingredients of a movie script, and it shows how the game will score them. You find out before you spend any in-game money.</p>
+      <h3>How to use it</h3>
+      <p>Choose at least one genre, a setting and a protagonist, then press Calculate. Everything else is optional. After that the results update as you change things, and your choices are saved on this device.</p>
+      <h3>What you get</h3>
+      <ul>
+        <li><strong>Script compatibility</strong> says how well your tags fit together, from 1 to 5. A score of 3 is neutral.</li>
+        <li><strong>Score modifier</strong> says how much that fit raises or lowers the script's base quality.</li>
+        <li><strong>Art appeal</strong> and <strong>Commercial appeal</strong> are the points your tags add to each side.</li>
+        <li><strong>Leans towards</strong> shows which side is stronger.</li>
+      </ul>
+      <h3>Good to know</h3>
+      <p>The numbers come from the game's own data. The tool leaves out the writer's skill and a few rules that only apply in a full playthrough. The details are under "What this assumes" in the results.</p>
+      <p>This is a fan-made tool and is not affiliated with the game's developers.</p>
+    </div>
+    <div class="modal-foot"><button class="btn btn-primary" type="button" id="aboutDone">Got it</button></div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <div class="footer-about">
+        <p>A fan-made tool for Hollywood Animal. It is not affiliated with the game's developers. Calculations run in your browser, and your selections are saved on this device only.</p>
+        <p><a class="footer-link" href="https://github.com/CallOn84/Hollywood-Animal-Calculator" target="_blank" rel="noopener">View the project on GitHub<span class="sr-only"> (opens in a new tab)</span></a></p>
+      </div>
+      <p class="footer-data" id="dataInfo">Loading game data…</p>
+    </div>
+  </footer>
+
+  <script src="assets/sql.js/sql-wasm.js"></script>
+  <script src="components/EagerLoading.js"></script>
+  <script src="components/Quick%20Mode/LogicHelpers.js"></script>
+  <script src="components/Quick%20Mode/ScriptCompatibility.js"></script>
+  <script src="components/Quick%20Mode/FilmAppeal.js"></script>
+  <script src="utils/SaveRestore.js"></script>
+  <script src="utils/QuickModeGenres.js"></script>
+  <script src="utils/QuickModeUI.js"></script>
+  <script src="utils/QuickModeResults.js"></script>
+  <script src="utils/QuickModeSearch.js"></script>
+  <script src="utils/QuickModeInfo.js"></script>
+  <script src="utils/QuickModeStart.js"></script>
+</body>
+</html>
