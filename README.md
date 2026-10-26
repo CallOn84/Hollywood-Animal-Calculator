@@ -21,7 +21,7 @@
   <p align="center">
     A free web tool that shows how well the story elements of a Hollywood Animal script fit together.
     <br />
-    <a href="https://callon84.github.io/Hollywood-Animal-Calculator/"><strong>Open the calculator »</strong></a>
+    <a href="https://callon84.github.io/hollywood-animal-calculator/"><strong>Open the calculator »</strong></a>
     <br />
     <br />
     <a href="https://github.com/CallOn84/Hollywood-Animal-Calculator/issues/new?labels=bug">Report Bug</a>
