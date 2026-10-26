@@ -83,6 +83,9 @@ This is a fan-made tool and is not affiliated with the game's developers.
 * [![CSS3][CSS3-badge]][CSS3-url]
 * [![JavaScript][JavaScript-badge]][JavaScript-url]
 * [![SQLite][SQLite-badge]][SQLite-url] through [sql.js](https://github.com/sql-js/sql.js)
+* ![Drawio](https://img.shields.io/badge/drawio-%23F08705.svg?style=for-the-badge&logo=diagrams.net&logoColor=white)
+* ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
+* ![Claude](https://img.shields.io/badge/claude-%23D97757.svg?style=for-the-badge&logo=claude&logoColor=white) assisted
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
