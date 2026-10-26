@@ -110,25 +110,33 @@ Quick Mode needs at least one genre, a setting and a protagonist. Everything els
 
 Search for a genre, or choose one from the list. Use **Add genre** to add more, then set each share with the slider, by typing a percentage into the box, or with the small up and down buttons.
 
-![Searching for a genre, adding a second one and setting the percentages][usage-genres]
+<p align="center">
+<img width="704" height="470" alt="usage-1-genres" src="https://github.com/user-attachments/assets/4e810b7b-3228-4a3b-85d7-c36dce61808f" />
+</p>
 
 ### 2. Add the story elements
 
 Choose a setting and a protagonist, then optionally an antagonist, a finale, supporting characters and themes or events.
 
-![Choosing the setting, protagonist, antagonist, finale, a supporting character and a theme][usage-story]
+<p align="center">
+  <img width="704" height="470" alt="usage-2-story-elements (test)" src="https://github.com/user-attachments/assets/63d80ef5-eea2-4439-a260-0d4e26b2b8ad" />
+</p>
 
 ### 3. Use the quick tag search
 
 Not sure where a tag belongs? Type its name in **Quick tag search** and pick it. It goes straight into the right field for you, and the list shows what kind of tag each match is.
 
-![Searching for tags and watching them fill the right fields][usage-search]
+<p align="center">
+  <img width="704" height="470" alt="usage-3-quick-search" src="https://github.com/user-attachments/assets/aab25173-159a-4711-b354-00e24897f28f" />
+</p>
 
 ### 4. Calculate
 
 Press **Calculate** and the page scrolls to your results. After that, the results update as you change your choices. **Reset all** clears everything and starts again.
 
-![Pressing Calculate and scrolling to the results][usage-calculate]
+<p align="center">
+  <img width="704" height="440" alt="usage-4-calculate" src="https://github.com/user-attachments/assets/0e65f429-7a11-44bb-881c-2aed5d46d1ac" />
+</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
