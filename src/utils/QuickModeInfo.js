@@ -114,16 +114,32 @@ function InitTerms() {
       term.querySelector(".term-btn").setAttribute("aria-expanded", "false");
     }
   };
+  const FitTip = (term, tip) => {
+    tip.style.marginLeft = "0px";
+    tip.style.position = "fixed";
+    tip.style.left = "0px";
+    tip.style.top = "0px";
+    tip.style.visibility = "hidden";
+    tip.hidden = false;
+    const width = tip.getBoundingClientRect().width;
+    const fragments = term.getClientRects();
+    const startsAt = Math.min(fragments[0].left, fragments[fragments.length - 1].left);   // where "left: 0" lands for a word that wraps
+    const gutter = 16;
+    const farthestLeft = document.documentElement.clientWidth - gutter - width;
+    tip.style.position = tip.style.left = tip.style.top = tip.style.visibility = "";
+    tip.style.marginLeft = (startsAt > farthestLeft ? farthestLeft - startsAt : 0) + "px";
+  };
+  const KeepTipOnScreen = (tip) => {
+    // A word near the bottom of the screen opens its explanation partly off screen, so nudge the page by just enough to show all of it.
+    const margin = 12;
+    const hidden = tip.getBoundingClientRect().bottom - (window.innerHeight - margin);
+    if (hidden > 0) window.scrollBy({ top: hidden, left: 0, behavior: "smooth" });
+  };
   const SetOpen = (term, open) => {
     const tip = term.querySelector(".term-tip");
     const btn = term.querySelector(".term-btn");
     if (open) {
-      CloseAll(term);
-      tip.hidden = false;
-      tip.style.marginLeft = "0px";
-      const gutter = 16;
-      const overflow = tip.getBoundingClientRect().right - (document.documentElement.clientWidth - gutter);
-      if (overflow > 0) tip.style.marginLeft = -overflow + "px";   // keep the tip inside the window
+      if (tip.hidden) { CloseAll(term); FitTip(term, tip); }
     } else {
       tip.hidden = true;
     }
@@ -136,8 +152,10 @@ function InitTerms() {
     term.addEventListener("pointerleave", (event) => { if (event.pointerType === "mouse" && !pinned) SetOpen(term, false); });
     btn.addEventListener("click", () => {
       const isOpen = btn.getAttribute("aria-expanded") === "true";
-      if (isOpen && pinned) { pinned = false; SetOpen(term, false); }
-      else { pinned = true; SetOpen(term, true); }
+      if (isOpen && pinned) { pinned = false; SetOpen(term, false); return; }
+      pinned = true;
+      SetOpen(term, true);
+      KeepTipOnScreen(term.querySelector(".term-tip"));
     });
     btn.addEventListener("focus", () => SetOpen(term, true));
     btn.addEventListener("blur", () => { pinned = false; SetOpen(term, false); });
