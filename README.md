@@ -69,9 +69,7 @@ For every script you get:
 * **Leans towards**, which side is stronger.
 * The **weakest and strongest pairs** of tags in your script, so you can see what to swap.
 
-The tool leaves out the writer's skill and a few rules that only apply in a full playthrough. The results page lists what it assumes.
-
-Everything runs in your browser. Your selections are saved on your own device only. This is a fan-made tool and is not affiliated with the game's developers.
+This is a fan-made tool and is not affiliated with the game's developers.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -108,13 +106,13 @@ Quick Mode needs at least one genre, a setting and a protagonist. Everything els
 
 ### 1. Pick your genres
 
-Search for a genre, or choose one from the list. Use **Add genre** to add more (up to 10), then set each share with the slider, by typing a percentage into the box, or with the small up and down buttons (5% steps). The shares always add up to 100%.
+Search for a genre, or choose one from the list. Use **Add genre** to add more, then set each share with the slider, by typing a percentage into the box, or with the small up and down buttons.
 
 ![Searching for a genre, adding a second one and setting the percentages][usage-genres]
 
 ### 2. Add the story elements
 
-Choose a setting and a protagonist, then optionally an antagonist, a finale, supporting characters and themes or events (up to 7 of each).
+Choose a setting and a protagonist, then optionally an antagonist, a finale, supporting characters and themes or events.
 
 ![Choosing the setting, protagonist, antagonist, finale, a supporting character and a theme][usage-story]
 
