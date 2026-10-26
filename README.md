@@ -57,7 +57,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Hollywood Animal Calculator screenshot][product-screenshot]](https://callon84.github.io/Hollywood-Animal-Calculator/)
+<p align="center">
+  <img width="650" height="448" alt="screenshot" src="https://github.com/user-attachments/assets/4112fa3d-2cd3-487d-a30f-05067e670378" />
+</p>
 
 Hollywood Animal Calculator is a fan-made web tool for players of [Hollywood Animal](https://weappy-studio.com/hollywood-animal/). In **Quick Mode** you pick the genres and story elements of a script, and the tool shows how well they work together before you spend any in-game money.
 
@@ -80,7 +82,7 @@ This is a fan-made tool and is not affiliated with the game's developers.
 * [![HTML5][HTML5-badge]][HTML5-url]
 * [![CSS3][CSS3-badge]][CSS3-url]
 * [![JavaScript][JavaScript-badge]][JavaScript-url]
-* [![SQLite][SQLite-badge]][SQLite-url] running in the browser through [sql.js](https://github.com/sql-js/sql.js)
+* [![SQLite][SQLite-badge]][SQLite-url] through [sql.js](https://github.com/sql-js/sql.js)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
